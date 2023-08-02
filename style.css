@@ -1,0 +1,374 @@
+/* https://dribbble.com/shots/21287391-Central-Park-Tower-Living */
+:root {
+  --font-manrope-el: "ManRopeEL", sans-serif;
+  --font-manrope-b: "ManRopeB", sans-serif;
+  --color-gray: rgb(198, 190, 190);
+  --color-darker-orange: rgb(189, 127, 46);
+  --color-dark-orange: rgb(214, 149, 63);
+  --color-light-orange: rgb(218, 154, 72);
+  --color-extra-light-orange: rgb(255, 246, 235);
+}
+@font-face {
+  font-family: ManRopeEL;
+  src: url(./fonts/Manrope-ExtraLight.ttf);
+}
+@font-face {
+  font-family: ManRopeB;
+  src: url(./fonts/Manrope-Bold.ttf);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* HEADER CONTENT */
+.dashboard {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  font-family: var(--font-manrope-el);
+}
+.header-info {
+  height: 35%;
+  width: 100%;
+  color: white;
+  background-image: linear-gradient(rgb(129, 86, 97), rgb(240, 163, 115));
+  padding: 0.75em 1em;
+  border-bottom-left-radius: 50% 8px;
+  border-bottom-right-radius: 50% 8px;
+}
+.notifications-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.time {
+  padding-left: 0.75em;
+}
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.user-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1em 0 2em 0;
+}
+.avatar {
+  font-size: 2em;
+  cursor: pointer;
+  scale: 1;
+  transition: scale 0.25s ease-out;
+}
+.avatar:hover {
+  scale: 1.2;
+  transition: scale 0.25s ease-in;
+}
+.user-profile > h3,
+.weather-info > * {
+  font-weight: 100;
+}
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75em;
+}
+.package-alert {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+  border: 1px solid black;
+  border-radius: 30px;
+  padding: 0.75em 1em;
+  position: relative;
+  bottom: -35px;
+  color: black;
+  background-color: white;
+  cursor: pointer;
+  z-index: 2;
+  scale: 1;
+  transition: all 0.25s ease-in;
+}
+.package-alert > img {
+  width: 26px;
+}
+.package {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.deliver-package {
+  color: var(--color-gray);
+  transition: all 0.25s ease-out;
+}
+
+/* MAIN CONTENT */
+.activity-cards-container {
+  height: 70%;
+  width: 100%;
+  color: black;
+  padding: 1em;
+  padding-top: 2.35em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 20px;
+  grid-template-areas:
+    "exercise exercise"
+    "todo todo-2"
+    "reservations reservations";
+  overflow-y: auto;
+  margin-top: -0.35em;
+}
+.upcoming-class {
+  height: 35%;
+}
+.upcoming-class-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 15%;
+  margin-bottom: 0.5em;
+}
+.upcoming-class-option > h1 {
+  color: var(--color-gray);
+}
+.upcoming-class {
+  grid-area: exercise;
+  height: 100%;
+}
+.media-scroller {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-radius: 25px;
+  overscroll-behavior-inline: contain;
+  background: transparent;
+}
+.inline-snap {
+  scroll-snap-type: inline mandatory;
+}
+.inline-snap > * {
+  scroll-snap-align: start;
+}
+.media-element {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 25px;
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  display: grid;
+  grid-template-rows: min-content;
+}
+img.exercise-thumbnail {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  filter: blur(0) brightness(60%);
+  z-index: 1;
+  transition: filter 0.4s ease-out;
+  transition: object-position 0.5s linear;
+}
+.media-element:hover > img.exercise-thumbnail {
+  filter: blur(2px) brightness(60%);
+  object-position: 0 -30px;
+  transition: filter 0.4s ease-in;
+  transition: object-position 0.5s linear;
+}
+.exercise-details {
+  position: absolute;
+  color: #ffffff;
+  bottom: 15px;
+  left: 20px;
+  z-index: 1;
+  font-size: 0.8em;
+  transition: font-size 0.5s linear;
+}
+.exercise-details > h5 {
+  font-weight: 100;
+}
+.media-element:hover > .exercise-details {
+  font-size: 0.9em;
+  transition: font-size 0.5s linear;
+}
+.todo-card {
+  grid-area: todo;
+  border: 1px solid black;
+  border-radius: 25px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1em 1em;
+}
+.other.todo-card {
+  grid-area: todo-2;
+  border-radius: 25px;
+  height: 160px;
+}
+.todo-task {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.todo-task > img {
+  width: 30px;
+}
+.todo-card h4 {
+  margin-bottom: 0.3em;
+  color: var(--color-dark-orange);
+}
+.reservation-card {
+  grid-area: reservations;
+  border: 1px solid black;
+  border-radius: 25px;
+  height: 195px;
+  padding: 0.75em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+img.reserve-thumbnail {
+  width: 40px;
+}
+.reservation-info > h3 {
+  margin-bottom: 0.35em;
+  padding: 0 0.5em;
+}
+.reservation-details {
+  background-color: var(--color-extra-light-orange);
+  border-top: 1px solid black;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 0.25em 0.5em;
+}
+.reservation-date-time {
+  color: var(--color-dark-orange);
+}
+
+/* QUICK MENU */
+.quick-menu-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 50%;
+  border: none;
+  height: 50px;
+  width: 50px;
+  background-color: var(--color-dark-orange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  scale: 0.9;
+  transition: scale 0.3s ease-out;
+}
+.quick-menu-btn > img {
+  width: 30px;
+  object-fit: cover;
+}
+.quick-menu-btn:hover {
+  scale: 1;
+  transition: scale 0.3s ease-in;
+}
+.quick-menu-btn:active {
+  color: white;
+  background-color: var(--color-darker-orange);
+  transform: scale(0.9);
+}
+.quick-menu-btn:active {
+  animation: revertToDefault 0.5s ease 0.5s forwards;
+}
+@keyframes revertToDefault {
+  to {
+    background-color: white;
+    transform: scale(1);
+  }
+}
+
+.card-bs {
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 8px 0 15px rgba(0, 0, 0, 0.1), -8px 0 15px rgba(0, 0, 0, 0.1),
+    0 15px 8px rgba(0, 0, 0, 0.1), 0 -1px 4px rgba(0, 0, 0, 0.1);
+  transition: all ease 0.2s;
+  cursor: pointer;
+}
+.card-bs:hover {
+  animation-play-state: paused;
+  box-shadow: 16px 0 30px rgba(0, 0, 0, 0.1), -16px 0 30px rgba(0, 0, 0, 0.1),
+    0 20px 10px rgba(0, 0, 0, 0.1), 0 0px 0px rgba(0, 0, 0, 0.1);
+  translate: 0 -5px;
+}
+.card-bs-nt {
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 8px 0 15px rgba(0, 0, 0, 0.1), -8px 0 15px rgba(0, 0, 0, 0.1),
+    0 15px 8px rgba(0, 0, 0, 0.1), 0 -1px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease-out;
+}
+.card-bs-nt:hover {
+  animation-play-state: paused;
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 16px 0 30px rgba(0, 0, 0, 0.1), -16px 0 30px rgba(0, 0, 0, 0.1),
+    0 20px 10px rgba(0, 0, 0, 0.1), 0 0px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease-out;
+}
+.package-alert:hover {
+  scale: 1.05;
+  background-color: var(--color-light-orange);
+  transition: all 0.25s ease-in;
+  color: white;
+}
+.card-bs-nt:hover > .package > .deliver-package {
+  color: rgb(138, 83, 12);
+  transition: all 0.25s ease-in;
+}
+.bold {
+  font-family: var(--font-manrope-b);
+}
+.shake {
+  animation: shake 4s ease-in-out infinite;
+}
+@keyframes shake {
+  0% {
+    transform: translateY(0);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateY(0.23em);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  }
+  10%,
+  30%,
+  50% {
+    transform: translateY(-0.1em);
+  }
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+}
